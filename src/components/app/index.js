@@ -29,23 +29,20 @@ class Index extends Component {
         } else {
             this.setState({error: ''});
             year = year.toString();
-            let visokos = 0;
+            let leap = 0;
             let last = 0;
             for (let i = 1; i <= year; i++) {
-                //console.log(i);
                 if ((i - 1) % 100 == 0 && (i - 1) % 500 != 0) {
                     continue;
                 }
                 if ((i - 1) % 5 == 0 && i != 1) {
-                    visokos++;
+                    leap++;
                 }
                 if (i % 5 == 0 && i != 1) {
                     last = i;
                 }
             }
-            //console.log(visokos, last);
-            let digit = ((year * 3) - 3 + visokos) % 7;
-            //let firstDayOfMonth = (digit + (month-1) * 2) % 7;
+            let digit = ((year * 3) - 3 + leap) % 7;
             let firstDayOfMonth;
             if (year == last && month > 1) {
                 firstDayOfMonth = ((digit + (month - 1) * 2) + 1) % 7;
@@ -86,7 +83,7 @@ class Index extends Component {
                         Get the day!
                     </button>
                     <p className={"getDay"}>{this.state.computedDay ? this.state.computedDay : null}</p>
-                    {this.state.error ? <p className={"error"}>{this.state.error}</p> : null}
+                    {this.state.error ? <p className='error'>{this.state.error}</p> : null}
                 </div>
             </div>
         );
